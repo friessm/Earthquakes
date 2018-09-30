@@ -25,13 +25,6 @@ def get_tectonic_plate_data():
     """
     Loading geospatial data of earth's tectonic plates. Returns a geojson object.
     Source: https://github.com/fraxen/tectonicplates 
-
-    TODO: Include the license in the .md file: https://opendatacommons.org/licenses/by/1.0/. See what Fraxen did. 
-    Credits to Hugo Ahlenius, Nordpil and Peter Bird for the data source.
-    The data was obtained form
-    Original source data: http://peterbird.name/oldFTP/PB2002/
-    Converted to geojson format by 
-    https://github.com/fraxen/tectonicplates 
     """
     with open('tectonic_plates.geojson.json', 'r') as infile:
         plates = geojson.load(infile)
