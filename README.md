@@ -4,6 +4,8 @@ Visualizing the location and magnitude of earthquakes  from the last 30 days and
 
 Data fetched from https://earthquake.usgs.gov/earthquakes/feed/
 
+![earthquakes](https://user-images.githubusercontent.com/19022332/46256320-56d33700-c4a9-11e8-828c-e88a1b578d7a.png)
+
 ## Source data for the tectonic plates
 
 The data was downloaded from https://github.com/fraxen/tectonicplates in September 2018. Thanks to Hugo Ahlenius, Nordpil and Peter Bird for providing this data set.
