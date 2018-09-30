@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <script src='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
+        <style>
+            body {
+                margin:0; 
+                padding:0;
+            }
+            
+            #map {
+                position:absolute; 
+                top:0; 
+                bottom:0; 
+                width:100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='map' style='width: 1024px; height: 768px;'></div>
+        
+        <script>
+            mapboxgl.accessToken = '{{ACCESS_KEY}}';
+            var map = new mapboxgl.Map({
+                center: [0, 0],
+                container: 'map',
+                style: 'mapbox://styles/mapbox/dark-v9',
+                zoom: 1
+            });
+            
+            map.on("load", function() {
+                var earthquakes = {{earthquakes|safe}};
+
+                var plates = {{plates|safe}};
+
+                map.addSource("tectonic-plates", {
+                    "type": "geojson",
+                        "data": plates
+                });
+
+                map.addSource("earthquake-marker", {
+                    "type": "geojson",
+                        "data": earthquakes
+                });
+
+                map.addLayer({
+                    "id": "plates",
+                    "type": "line",
+                    "source": "tectonic-plates",
+                    "layout": {},
+                    "paint": {
+                        "line-color": "green",
+                        "line-opacity": 1.0
+                    }
+                });
+
+                map.addLayer({
+                    "id": "earthquakes",
+                    "type": "circle",
+                    "source": "earthquake-marker",
+                    "paint": {
+                        "circle-radius": ["number", ["get", "radius"]],
+                        "circle-color": [
+                            "interpolate", ["linear"], ["number", ["get", "mag"]],
+                            1, "yellow",
+                            2, "yellow",
+                            3, "yellow",
+                            4, "orange",
+                            5, "orange",
+                            6, "orange",
+                            7, "red",
+                            8, "red",
+                            9, "red"
+                        ],
+                        "circle-opacity": 0.8,
+                    }
+                });
+            }); 
+            
+        </script>
+    </body>
+</html>
