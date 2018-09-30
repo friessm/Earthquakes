@@ -5,10 +5,10 @@ from requests import get
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-# app.config.from_envvar('APP_CONFIG_FILE', silent=True)
+app.config.from_envvar('APP_CONFIG_FILE', silent=True)
 
-# MAPBOX_ACCESS_KEY = app.config['MAPBOX_ACCESS_KEY']
-MAPBOX_ACCESS_KEY = 'pk.eyJ1IjoiZnJpZXNzbSIsImEiOiJjamtrMDY2NWQxbGtsM3ZvM3VpMGdoNGZ1In0.2w6Su2F2Ox-hxCBu2kMYUg'
+MAPBOX_ACCESS_KEY = app.config['MAPBOX_ACCESS_KEY']
+
 
 def get_earthquake_data():
     """
