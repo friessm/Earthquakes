@@ -9,7 +9,6 @@ app.config.from_envvar('APP_CONFIG_FILE', silent=True)
 
 MAPBOX_ACCESS_KEY = app.config['MAPBOX_ACCESS_KEY']
 
-
 def get_earthquake_data():
     """
     Fetching the earthquakes of the last 30 days from the usgs API.
