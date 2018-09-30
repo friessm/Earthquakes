@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8" />
         <script src='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js'></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
         <style>
@@ -20,18 +22,18 @@
         <div id='map' style='width: 1600px; height: 900px;'></div>
         
         <script>
-            mapboxgl.accessToken = '{{ACCESS_KEY}}';
+            mapboxgl.accessToken = '{{ ACCESS_KEY }}';
             var map = new mapboxgl.Map({
-                center: [0, 0],
+                center: [0, 12.7803193],
                 container: 'map',
                 style: 'mapbox://styles/mapbox/dark-v9',
-                zoom: 1
+                zoom: 1.65
             });
             
             map.on("load", function() {
-                var earthquakes = {{earthquakes|safe}};
+                var earthquakes = {{ earthquakes|safe }};
 
-                var plates = {{plates|safe}};
+                var plates = {{ plates|safe }};
 
                 map.addSource("tectonic-plates", {
                     "type": "geojson",

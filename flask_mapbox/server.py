@@ -5,10 +5,10 @@ from requests import get
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+# app.config.from_envvar('APP_CONFIG_FILE', silent=True)
 
-# Get Mapbox access token
-app.config.from_envvar('APP_CONFIG_FILE', silent=True)
-MAPBOX_ACCESS_KEY = app.config['MAPBOX_ACCESS_KEY']
+# MAPBOX_ACCESS_KEY = app.config['MAPBOX_ACCESS_KEY']
+MAPBOX_ACCESS_KEY = 'pk.eyJ1IjoiZnJpZXNzbSIsImEiOiJjamtrMDY2NWQxbGtsM3ZvM3VpMGdoNGZ1In0.2w6Su2F2Ox-hxCBu2kMYUg'
 
 def get_earthquake_data():
     """
@@ -39,7 +39,7 @@ def remap(value_old, min_old, max_old, min_new, max_new):
     value_new = (((value_old - min_old) * range_new) / range_old) + min_new
     return value_new
 
-def prepare_geojson(earthquake):   
+def prepare_geojson(earthquakes):   
     """
     Prepare the geojson data of the earthquakes by creating a new geojson object 
     that only contains the parameters required for the map in order to increase
@@ -67,15 +67,14 @@ def prepare_geojson(earthquake):
 
     return geojson.FeatureCollection(feature_list)
 
-
-# TODO: move both in earthquake_vizualiation() and solve global variable problem
-earthquakes = get_earthquake_data()
-plates = get_tectonic_plate_data()
-
-earthquakes = prepare_geojson(earthquakes)
-
 @app.route('/earthquakes')
 def earthquakes_visualization():
+
+    earthquakes = get_earthquake_data()
+    plates = get_tectonic_plate_data()
+
+    earthquakes = prepare_geojson(earthquakes)
+
     return render_template(
         'mapbox_gl.html', 
         ACCESS_KEY=MAPBOX_ACCESS_KEY,

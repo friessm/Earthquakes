@@ -14,6 +14,3 @@ The data was downloaded from https://github.com/fraxen/tectonicplates in Septemb
 ## License
 
 This collection is made available under the Open Data Commons Attribution License: http://opendatacommons.org/licenses/by/1.0/, please refer to LICENSE.md for more information.
-
-
-
